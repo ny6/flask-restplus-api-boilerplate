@@ -128,3 +128,4 @@ dmypy.json
 
 # yk py
 migrations/
+test.db

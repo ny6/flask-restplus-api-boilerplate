@@ -9,3 +9,13 @@
 * POSTGRES_USER = "user_name"
 * POSTGRES_PW = "password"
 * POSTGRES_DB = "db_name"
+* POSTGRES_TEST_DB = "test_db_name"
+
+
+### Run Migrations
+
+```bash
+python manage.py db init
+python manage.py db migrate --message 'initial database migration'
+python manage.py db upgrade
+```
