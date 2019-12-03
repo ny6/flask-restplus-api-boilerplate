@@ -39,3 +39,19 @@ class Auth:
 
         response_object = {'status': False, 'message': resp}
         return response_object, 401
+
+    @staticmethod
+    def get_logged_in_user(new_request):
+        auth_token = new_request.headers.get('Authorization')
+        if not auth_token:
+            response_object = {'status': False, 'message': 'You are not authorized!'}
+            return response_object, 401
+
+        resp = User.decode_auth_token(auth_token)
+        if not isinstance(resp, str):
+            user = User.query.filter_by(id=resp).first()
+            response_object = {'status': True, 'data': {'id': user.id, 'email': user.email, 'admin': user.admin}}
+            return response_object, 200
+
+        response_object = {'status': False, 'message': resp}
+        return response_object, 401
